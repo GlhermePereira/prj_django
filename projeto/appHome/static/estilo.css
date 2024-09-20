@@ -1,0 +1,20 @@
+h1 {
+color: red;
+text-algin: center;
+}
+
+body{
+background-color: aquamarine;
+box-sizing: border-box;
+margin: 0;
+}
+#nav {
+background-color: black;
+}
+
+#nav h1 {
+color: white;
+}
+#nav p {
+color: white;
+}

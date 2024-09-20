@@ -1,0 +1,9 @@
+glherme at archlinux in ~/Fatec/web_3/primeiro-projeto-django
+$ python -m venv vm
+
+glherme at archlinux in ~/Fatec/web_3/primeiro-projeto-django
+$ source vm/bin/activate
+
+glherme at archlinux in ~/Fatec/web_3/primeiro-projeto-django (vm)
+$
+pip install mypy django-stubs black isort flake8 flake8-django pylint djlint pyright djangorestframework-stubs django
