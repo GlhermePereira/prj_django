@@ -1,4 +1,4 @@
-#!/home/glherme/Fatec/web_3/primeiro-projeto-django/vm/bin/python
+#!/home/glherme/Fatec/web-3/prj_django/vm/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys

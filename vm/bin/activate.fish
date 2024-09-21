@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/home/glherme/Fatec/web_3/primeiro-projeto-django/vm"
+set -gx VIRTUAL_ENV "/home/glherme/Fatec/web-3/prj_django/vm"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

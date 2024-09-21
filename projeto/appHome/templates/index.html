@@ -2,6 +2,9 @@
 {% load static %}
 {% block main %}
 <div class="card mb-3">
+  {% for message in messages %}
+  {{ message }}
+  {% endfor %}
   <img src="{% static 'woman-main.jpg' %}" class="card-img-top" alt="..." width="100%">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
@@ -20,4 +23,5 @@
   <img src="..." class="card-img-bottom" alt="...">
 </div>
 <img src="{% static 'woman-main.jpg' %}" alt="My image">
+<a class="primary btn-lg px-4 me-md 2" href="{%url 'cadastrar_user'%}">Cdastra-se</a>
 {% endblock main %}

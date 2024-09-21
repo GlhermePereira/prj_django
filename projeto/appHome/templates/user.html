@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+{% for user in dados %}
+<p>{{user.nome}} ({{user.email}})</p>
+{%endfor%}
+{% endblock main %}
