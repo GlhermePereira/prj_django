@@ -3,3 +3,6 @@ plugins = ["django-stubs"]
 
 [tool.django-stubs]
 django_settings_module = "projeto.settings"
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "projeto.settings"
+
