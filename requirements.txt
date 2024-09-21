@@ -18,6 +18,7 @@ flake8-django==1.4
 html-tag-names==0.1.2
 html-void-elements==0.1.0
 idna==3.10
+iniconfig==2.0.0
 isort==5.13.2
 jsbeautifier==1.15.1
 json5==0.9.25
@@ -29,10 +30,13 @@ nodeenv==1.9.1
 packaging==24.1
 pathspec==0.12.1
 platformdirs==4.3.6
+pluggy==1.5.0
 pycodestyle==2.11.1
 pyflakes==3.1.0
 pylint==2.17.7
 pyright==1.1.381
+pytest==8.3.3
+pytest-django==4.9.0
 PyYAML==6.0.2
 regex==2024.9.11
 requests==2.32.3
