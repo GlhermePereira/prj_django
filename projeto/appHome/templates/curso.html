@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<div class="card mb-3">
+  <div class="card-body">
+
+
+    {% for user in dados %}
+    <p>{{user.nome}} ({{user.autor}}) {{user.duracao}} {{user.preco}}</p>
+    {%endfor%}
+  </div>
+</div>
+{% endblock main %}

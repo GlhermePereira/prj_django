@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load static %}
+{% block main %}
+<h1>Novo usuário</h1>
+<div class="card mb-3">
+  <div class="card-body">
+
+    <form action="{% url 'cadastrar_user' %}" method="post">
+    <div class="mb-3">
+      {% csrf_token %}
+        {{form}} 
+      <input type="submit" value="Cadastrar" class="btn btn-success">
+    </form>
+  </div>
+</div>
+</div>
+{% endblock main %}

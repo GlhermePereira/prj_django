@@ -1,0 +1,22 @@
+1. Utilizando o projeto Django que está sendo desenvolvido na aula, criar uma nova model chamada Curso com os atributos nome, autor, duracao e preco, sendo o preco do tipo DecimalField(max_digits=10, decimal_places=2).
+ 
+2. Em seguida, crie o formulário para cadastrar os cursos (Dica: o atributo preco é do tipo NumberInput e de conter o atributo step=0.01).
+ 
+3. Defina a url, e a view para exibir a página de cadastro, que deve ser criada dentro do diretório templates.
+ 
+4. No rodapé da página Mestre adicione um link para a página de cadastro de cursos, usuários e a página que mostra os usuários cadastrados.
+ 
+ 
+5. Após realizar o cadastro o usuário deve ser redirecionado para a página index.
+ 
+6. Uma mensagem de confirmação deve ser mostrada para o usuário.
+ 
+ 
+7. Por fim, crie uma página para exibir os cursos cadastrados. Defina a url, e a view para página html criada dentro do diretório templates.
+ 
+ 
+8. No menu principal e no rodapé da página Mestre adicione um link para a página de Cursos.
+ 
+9. A cada novo curso cadastrado, um novo card é criado.
+ 
+ 

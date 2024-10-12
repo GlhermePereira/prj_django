@@ -1,13 +1,31 @@
 {% extends "base.html" %}
 {% load static %}
 {% block main %}
-<div class="container col-6 mt-5">
-  <h1>Novo usuario</h1>
-  <form action="{% url 'cadastrar_user' %}" method="post">
-    {% csrf_token %}
-    <label for="" class="form_label"> Nome Completo </label>
-    {{form}}
-    <input type="submit" value="Cadastrar" class="btn btn-success">
-  </form>
+<h1>Novo usuário</h1>
+<div class="card mb-3">
+  <div class="card-body">
+
+    <form action="{% url 'cadastrar_user' %}" method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="id_nome" class="form-label">Nome Completo</label>
+        <input type="text" name="nome" id="id_nome" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_email" class="form-label">Email</label>
+        <input type="email" name="email" id="id_email" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="id_senha" class="form-label">Senha</label>
+        <input type="password" name="senha" id="id_senha" class="form-control" required>
+      </div>
+
+      <input type="submit" value="Cadastrar" class="btn btn-success">
+    </form>
+  </div>
+</div>
 </div>
 {% endblock main %}
