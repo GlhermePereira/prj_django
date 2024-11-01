@@ -7,7 +7,7 @@ class FormLogin(forms.ModelForm):
         fields = ('email', 'senha')
 
         widgets = {
-            'email': forms.EmailInput(attrs={'class': 'form_control'}),  # Change to EmailInput
-            'senha': forms.PasswordInput(attrs={'class': 'form_control'})  # Ensure this is PasswordInput
+            'email': forms.EmailInput(attrs={'class': 'form_control border border-success', 'type':'email'}),  # Change to EmailInput
+            'senha': forms.PasswordInput(attrs={'class': 'form_control border border-success', 'type':'password'})  # Ensure this is PasswordInput
         }
 
