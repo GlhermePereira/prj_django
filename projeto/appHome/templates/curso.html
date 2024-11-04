@@ -3,11 +3,31 @@
 {% block main %}
 <div class="card mb-3">
   <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Autor</th>
+          <th scope="col">Preço</th>
 
+        </tr>
+      </thead>
+      <tbody>
+        {% for curso in dados %}
+        <tr>
+          <th scope="row">{{ curso.id }}</th>
+          <td>{{ curso.nome }}</td>
+          <td>{{ curso.autor }}</td>
+          <td>{{ curso.preco }}</td>
+          <td>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>  
 
-    {% for user in dados %}
-    <p>{{user.nome}} ({{user.autor}}) {{user.duracao}} {{user.preco}}</p>
-    {%endfor%}
   </div>
 </div>
+
 {% endblock main %}

@@ -1,9 +1,36 @@
+
 {% extends "base.html" %}
 {% load static %}
+
 {% block main %}
-{% if not user.is_authenticated %}
-    <script>
-        window.location.href = "{% url 'index' %}";
-    </script>
-{% endif %}
+<div class="card mb-3">
+  <div class="card-body">
+        <h1>Bem-vindo ao Dashboard</h1>
+    <p>Usuário autenticado: {{ email }}</p>
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+          <th scope="col">Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in usuarios %}
+        <tr>
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.nome }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+            <a href="{% url 'excluir_usuario' user.id %}">Excluir</a> |
+                      <a href="{% url 'redefinir_senha' user.id %}">Alterar Senha</a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>  
+  </div>
+</div>
 {% endblock %}
+

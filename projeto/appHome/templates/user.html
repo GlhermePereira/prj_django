@@ -3,10 +3,27 @@
 {% block main %}
 <div class="card mb-3">
   <div class="card-body">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Nome</th>
+          <th scope="col">Email</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for user in dados %}
+        <tr>
+          <th scope="row">{{ user.id }}</th>
+          <td>{{ user.nome }}</td>
+          <td>{{ user.email }}</td>
+          <td>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>  
 
-    {% for user in dados %}
-    <p>{{user.nome}} ({{user.email}})</p>
-    {%endfor%}
   </div>
 </div>
 

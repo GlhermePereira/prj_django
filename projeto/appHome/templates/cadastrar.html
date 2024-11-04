@@ -1,10 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
 {% block main %}
-<h1>Novo usuário</h1>
 <div class="card mb-3">
   <div class="card-body">
-
+  <h1>Novo usuário</h1>
     <form action="{% url 'cadastrar_user' %}" method="post">
       {% csrf_token %}
 
