@@ -15,9 +15,13 @@ urlpatterns = [
     path("appHome/", views.appHome, name="appHome"),
     path("", views.fazer_login, name="fazer_login"),
     path("dashboard", views.dashboard, name="dashboard"),
-    path('excluir_usuario/<int:id_usuario>/', views.excluir_usuario, name='excluir_usuario'),
+    path('excluir_usuario/<int:id_usuario>/', 
+         views.excluir_usuario, name='excluir_usuario'),
     path("criaFoto/", views.criar_foto, name="criar_foto"),
     path('succes/', views.pagina_sucesso, name="pagina_sucesso"),
-    path('redefinir_senha/<int:id_usuario>/', views.redefinir_senha, name = "redefinir_senha"),
+    path('redefinir_senha/<int:id_usuario>/', 
+         views.redefinir_senha, name="redefinir_senha"),
+    path('galeria/', views.mostrar_fotos, name="galeria"),
+    #path('perfilUsuario/', views.perfil_usuario, name="perfil_usuario"),
+           ] 
 
-   ] 

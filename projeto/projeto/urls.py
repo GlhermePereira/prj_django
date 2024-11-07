@@ -23,4 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", include("appHome.urls")),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# Serve os arquivos de mídia durante o desenvolvimento
+#if settings.DEBUG:
+   # urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

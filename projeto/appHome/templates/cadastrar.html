@@ -4,7 +4,7 @@
 <div class="card mb-3">
   <div class="card-body">
   <h1>Novo usuário</h1>
-    <form action="{% url 'cadastrar_user' %}" method="post">
+    <form action="{% url 'cadastrar_user' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
 
       <div class="mb-3">
@@ -21,7 +21,10 @@
         <label for="id_senha" class="form-label">Senha</label>
         <input type="password" name="senha" id="id_senha" class="form-control" required>
       </div>
-
+    <div class="mb-3">
+        <label for="id_imagem" class="form-label">Imagem</label>
+        <input type="file" name="imagem" id="id_imagem" class="form-control" accept="image/*" required>
+    </div>
       <input type="submit" value="Cadastrar" class="btn btn-success">
     </form>
   </div>

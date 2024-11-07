@@ -3,14 +3,14 @@
 {% block main %}
 <div class="container mt-4">
   <div class="row">
-    {% for user in dados %}
+    {% for fotos in dados %}
     <div class="col-md-4 mb-4">
       <div class="card">
-        <img src="{{ user.imagem.url }}" class="card-img-top" alt="Imagem do usuário" style="height: 200px; object-fit: cover;">
         <div class="card-body">
-          <h5 class="card-title">{{ user.nome }}</h5>
-          <p class="card-text">{{ user.email }}</p>
+          <h5 class="card-title">{{ fotos.titulo }}</h5>
         </div>
+                <img src="{{ fotos.imagem.url }}" class="card-img-top" alt="Imagem do usuário" style="height: 200px; object-fit: cover;">
+
       </div>
     </div>
     {% endfor %}

@@ -6,9 +6,10 @@ class FormCadastroUser(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ('nome', 'email')  # Remova 'senha' daqui
+        fields = ('nome', 'email', 'imagem')  # Remova 'senha' daqui
         widgets = {
-            'nome': forms.TextInput(attrs={'class':'form_control'})
+            'nome': forms.TextInput(attrs={'class':'form_control'}),
+            'imagem': forms.FileInput(attrs={'accept': 'image/*'})
         }
 
     def save(self, commit=True):

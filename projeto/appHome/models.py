@@ -1,12 +1,25 @@
 from django.core.validators import EmailValidator
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, PermissionsMixin, Group, Permission
+import uuid
 #Curso com os atributos nome, autor, duracao e preco, sendo o preco do tipo DecimalField(max_digits=10, decimal_places=2).
+
+def rename_image(instance, filename):
+    ext = filename.split('.')[-1]  # Obtém a extensão do arquivo
+    # Gera um nome único para o arquivo com base em UUID e adiciona a extensão
+    return f'imagens/courses/{uuid.uuid4()}.{ext}'
+
+
 class Curso(models.Model):
     nome = models.CharField(max_length=100)
     autor = models.CharField(max_length=100)
     duracao = models.CharField(max_length=100)
     preco = models.DecimalField(max_digits=10, decimal_places=2)
+    imagem = models.ImageField(upload_to=rename_image, null=True)
+    imagem = models.ImageField(upload_to='imagens/courses/', null=True)
+    def __str__(self):
+        return self.nome
+
 
 class UsuarioManager(BaseUserManager):
     def create_user(self, email, senha=None, **extra_fields):
@@ -30,7 +43,7 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
     nome = models.CharField(max_length=30)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
-
+    imagem = models.ImageField(upload_to='imagens/users/', null=True)
     objects = UsuarioManager()
 
     USERNAME_FIELD = 'email'
@@ -52,6 +65,6 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
 class Foto(models.Model):
     titulo = models.CharField(max_length=100)
-    imagem = models.ImageField(upload_to='imagens/')
+    imagem = models.ImageField(upload_to='imagens/', null=True)
 
 

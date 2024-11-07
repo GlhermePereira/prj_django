@@ -6,7 +6,7 @@ from appHome.form_cadastro_usuario import FormCadastroUser
 from appHome.form_cadastro_curso import FormCadastroCurso
 #from appHome.form_foto import FotoForm
 from appHome.form_foto import FotoForm
-from appHome.models import Usuario
+from appHome.models import Foto, Usuario
 from appHome.models import Curso
 from appHome.form_login import FormLogin
 from django.contrib.auth.decorators import login_required
@@ -31,7 +31,7 @@ def home(request) :
 
 
 def cadastrar_user(request):
-    novo_user = FormCadastroUser(request.POST or None)
+    novo_user = FormCadastroUser(request.POST, request.FILES)
 
     if request.method == 'POST':
         email = request.POST.get('email')
@@ -50,21 +50,24 @@ def cadastrar_user(request):
     return render(request, "cadastrar.html", context)
 
 def cadastrar_curso(request):
- 
-    novo_curso = FormCadastroCurso(request.POST or None)
+    if request.method == 'POST':
+        # Instanciando o formulário com os dados do POST e o arquivo da imagem
+        form = FormCadastroCurso(request.POST, request.FILES)
+        
+        # Verificando se o formulário é válido
+        if form.is_valid():
+            form.save()  # Salvando o novo curso no banco de dados
+            messages.success(request, "Curso cadastrado com sucesso!")  # Mensagem de sucesso
+            return redirect('home')  # Redireciona para a página inicial
+    else:
+        form = FormCadastroCurso()  # Formulário vazio em caso de GET
 
-    if request.POST:
-        if novo_curso.is_valid():
-            novo_curso.save()
-            messages.success(request, "Usuario cadastrado com sucesso")
-            return redirect('home')
-    context = {
-        'form': novo_curso
-    }
-    return render(request, "cadastrar-curso.html", context)
+    return render(request, 'cadastrar-curso.html', {'form': form})
+
+
 
 def exibir_user(request):
-    user = Usuario.objects.all().values()
+    user = Usuario.objects.all()
 
     context = {
         'dados': user
@@ -73,13 +76,30 @@ def exibir_user(request):
     return render(request, "user.html", context)
 
 def appHome(request):
-    #Recupera a sessao do usuario se estiver ativa
+    # Recupera o e-mail do usuário da sessão
     email_do_usuario = request.session.get('email')
 
-    context = {
-            'email_do_usuario': email_do_usuario,
-            }
-    return render(request, "index.html", context)
+    print(email_do_usuario)  # Para fins de depuração (pode ser removido depois)
+
+    if email_do_usuario:
+        try:
+            # Recupera o usuário ativo na sessão
+            usuario_ativo = Usuario.objects.get(email=email_do_usuario)
+            print(usuario_ativo)  # Para fins de depuração (pode ser removido depois)
+        except Usuario.DoesNotExist:
+            # Caso o usuário não exista, redireciona para o login
+            return redirect('fazer_login')
+
+        # Passa os dados do usuário para o contexto
+        context = {
+            'usuario': usuario_ativo,  # Todos os dados do usuário
+        }
+
+        # Renderiza o template passando o contexto
+        return render(request, "perfil_usuario.html", context)
+
+    # Se não houver email na sessão, redireciona para a página de login
+    return redirect('fazer_login')
 
 def dashboard(request):
     # Verificar se o usuário está autenticado
@@ -106,13 +126,14 @@ def excluir_usuario(request, id_usuario):
 
     return redirect('dashboard')
 def exibir_curso(request):
-    curso = Curso.objects.all().values()
+    cursos = Curso.objects.all()
 
     context = {
-        'dados': curso
+        'dados': cursos  # Passando as instâncias completas do modelo
     }
 
     return render(request, "curso.html", context)
+
 
 
 
@@ -161,11 +182,23 @@ def criar_foto(request):
         form = FotoForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('pagina_sucesso')
+            return redirect('galeria')
     else:
         form = FotoForm()  # Esse formulário será exibido em uma requisição GET
 
     return render(request, 'criar_foto.html', {'form': form})
 
 def pagina_sucesso(request):
-    return render(request,'pagina_sucesso.html')
+    return render(request, 'pagina_sucesso.html')
+
+def mostrar_fotos(request):
+    fotos = Foto.objects.all()
+
+    context = {
+        'dados': fotos  
+        }
+
+    return render(request, "galeria.html", context)
+
+
+

@@ -2,9 +2,14 @@
 {% load static %}
 {% block main %}
 <div class="card mb-3">
-  {% for message in messages %}
-  {{ message }}
-  {% endfor %}
+{% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
   <img src="{% static 'woman-main.jpg' %}" class="card-img-top" alt="..." width="100%">
   <div class="card-body">
     <h5 class="card-title">Card title</h5>
