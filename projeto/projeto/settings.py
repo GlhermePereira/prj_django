@@ -71,7 +71,10 @@ TEMPLATES = [
     },
 ]
 
+
+
 WSGI_APPLICATION = "projeto.wsgi.application"
+
 
 
 # Database
@@ -125,6 +128,8 @@ STATIC_DIRS = [os.path.join(BASE_DIR, "static")]
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-LOGIN_URL = '/accounts/login/'  # URL para a página de login
+LOGIN_URL = '/login/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = '/dashboard/'  # Para onde o usuário é redirecionado após o login
 

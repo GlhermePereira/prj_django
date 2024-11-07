@@ -4,13 +4,15 @@ from django.template import loader
 from django.contrib import messages
 from appHome.form_cadastro_usuario import FormCadastroUser
 from appHome.form_cadastro_curso import FormCadastroCurso
+#from appHome.form_foto import FotoForm
+from appHome.form_foto import FotoForm
 from appHome.models import Usuario
 from appHome.models import Curso
 from appHome.form_login import FormLogin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import get_user_model
 from django.contrib.auth import update_session_auth_hash
-from appHome.form_resetar_senha import PasswordResetForm
+from appHome.form_resetar_senha import FormAlterarSenha
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.decorators import login_required
 
@@ -140,44 +142,30 @@ def fazer_login(request):
     return render(request, 'registration/login.html', context)
 
 
-#redefinir senha
-
-User = get_user_model()
-
-@login_required
 def redefinir_senha(request, id_usuario):
-    # Busca o usuário pelo ID
-    try:
-        usuario = User.objects.get(id=id_usuario)
-    except User.DoesNotExist:
-        messages.error(request, 'Usuário não encontrado.')
-        return redirect('dashboard')  # Redirecione para o dashboard ou outra página
-
-    if request.method == "POST":
-        form = PasswordResetForm(request.POST)
-
+    user = get_object_or_404(Usuario, id=id_usuario)  # Obtém o usuário pelo ID
+    if request.method == 'POST':
+        form = FormAlterarSenha(user, request.POST)
         if form.is_valid():
-            senha_atual = form.cleaned_data['senha_atual']
-            nova_senha = form.cleaned_data['nova_senha']
-            confirmar_nova_senha = form.cleaned_data['confirmar_nova_senha']
-
-            # Verifica se a senha atual está correta
-            if not request.user.check_password(senha_atual):
-                form.add_error('senha_atual', 'A senha atual está incorreta.')
-            elif nova_senha != confirmar_nova_senha:
-                form.add_error('confirmar_nova_senha', 'A nova senha e a confirmação não coincidem.')
-            else:
-                # Redefine a senha do usuário
-                usuario.set_password(nova_senha)
-                usuario.save()
-
-                # Atualiza a sessão para evitar logout após a troca de senha
-                update_session_auth_hash(request, usuario)
-                messages.success(request, 'Sua senha foi alterada com sucesso.')
-                return redirect('dashboard')  # Redirecione para o dashboard ou outra página
-                
+            user = form.save()
+            update_session_auth_hash(request, user)  # Mantém o usuário logado
+            messages.success(request, 'Senha alterada com sucesso!')
+            return redirect('dashboard')  # Redirecione para a página desejada
     else:
-        form = PasswordResetForm()
-    
-    return render(request, 'redefinir_senha.html', {'form': form, 'usuario': usuario})
+        form = FormAlterarSenha(user)
 
+    return render(request, 'redefinir_senha.html', {'form': form, 'user': user})
+
+def criar_foto(request):
+    if request.method == 'POST':
+        form = FotoForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('pagina_sucesso')
+    else:
+        form = FotoForm()  # Esse formulário será exibido em uma requisição GET
+
+    return render(request, 'criar_foto.html', {'form': form})
+
+def pagina_sucesso(request):
+    return render(request,'pagina_sucesso.html')

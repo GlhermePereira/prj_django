@@ -49,3 +49,9 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
 
     def __str__(self):
         return self.email
+
+class Foto(models.Model):
+    titulo = models.CharField(max_length=100)
+    imagem = models.ImageField(upload_to='imagens/')
+
+

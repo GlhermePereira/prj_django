@@ -1,8 +1,10 @@
 from os import name
-from django.urls import path
+from django.urls import path, include
+from django.conf import settings
 from . import views
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.views import LoginView
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("home/", views.home, name="home"),
@@ -12,9 +14,10 @@ urlpatterns = [
     path("curso/", views.exibir_curso, name="exibir_curso"),
     path("appHome/", views.appHome, name="appHome"),
     path("", views.fazer_login, name="fazer_login"),
-    #path("", LoginView.as_view(template_name='registration/login.html'), name="fazer_login"),
     path("dashboard", views.dashboard, name="dashboard"),
     path('excluir_usuario/<int:id_usuario>/', views.excluir_usuario, name='excluir_usuario'),
-    path('redefinir_senha/<int:id_usuario>/', views.redefinir_senha, name='redefinir_senha'),
-    #path('accounts/login/', auth_views.LoginView.as_view(), name='login'),  # URL para a página de login
-]
+    path("criaFoto/", views.criar_foto, name="criar_foto"),
+    path('succes/', views.pagina_sucesso, name="pagina_sucesso"),
+    path('redefinir_senha/<int:id_usuario>/', views.redefinir_senha, name = "redefinir_senha"),
+
+   ] 
